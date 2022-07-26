@@ -5,8 +5,10 @@ Le but de ces exercices est de créer des classes et leurs méthodes qui permett
 N'hésite pas à commit entre chaque exercice !
 1) Crée un répertoire Exercices de classes sur GitHub
 2) Initialise un répertoire comme répertoire git (git init)
-3) Ajoute le répertoire de GitHub en remote (git remote add origin url)
-4) Fais un premier commit avec ce fichier (git add puis git commit)
+3) Dire à git où envoyer le fichier modifié sur gitHub à distance (git remote add origin url)
+4) Ajouter des changements = prépa du commit (= prendre la pose) (git add (ajouter) 
+5) Faire le commit puis git commit (valider = appuyer sur le déclencheur)
+6) Push un nouveau commit (git -> github) (git push (-u origin master si première fois) ou publish branch si pas de branche) 
 
 """
 
