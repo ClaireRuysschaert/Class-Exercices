@@ -19,6 +19,9 @@ Crée une classe "Ennemi" qui aura ces attributs : Nom, Habilité, PV, Armure, D
 """
 
 # Ton code ici
+import random
+
+
 class Ennemi:
     def __init__(self, name, hability, PV, armor, damages):
         self.name = name
@@ -36,18 +39,27 @@ Cette classe dispose d'une méthode qui permet d'afficher un résumé au travers
 
 # Ton code ici
 class Billy():
-    def __init__(self, hability, endurance, skill, damages, armor):
+    def __init__(self, hability, PV, skill, damages, armor):
         self.hability = hability
-        self.endurance = endurance
+        self.PV = PV
         self.skill = skill
         self.damages = damages
         self.armor = armor
 
     def __str__(self) -> str:
-        return f"Habilitiy = {self.hability}; Endurence = {self.endurance}; Skill = {self.skill}; Damages = {self.damages}, Armor = {self.armor} "
+        return f"Habilitiy = {self.hability}; Endurence = {self.PV}; Skill = {self.skill}; Damages = {self.damages}, Armor = {self.armor}"
 
-billy = Billy(10, 15, 5, 8, 4)
-print(billy)
+    def fight(self, ennemi: Ennemi):
+        # Le combat dure jusqu'à ce qu'un joueur n'ait plus de PV.
+        while self.PV > 0 and ennemi.PV > 0:
+            dice = random.randint(1,6)
+            ratio = self.hability/ennemi.hability
+            billy_damages = self.damages + (dice*ratio) - ennemi.armor
+            ennemi.PV -= billy_damages
+            ennemi_damages = ennemi.damages + ((7-(dice*(1/ratio)))) - billy.armor
+            self.PV -= ennemi_damages
+            print(f"Billy damages = {billy_damages}; ennemi PV left = {ennemi.PV}, Ennemi damages = {ennemi.damages}; billy PV left = {billy.PV}.")
+
 
 """
 Exercice 3:
@@ -58,9 +70,18 @@ Note:
 Cette méthode peut implémenter d'autre méthodes qui permettront de calculer les dégats infligés, 
 d'afficher les PV restants de chacun des participants, etc. (N'hésite pas à casser le problème en morceaux !)
 """
+# Comparer l'habilité B/E
+# Simuler un lancer de dé
+# Multiplier le lancer de dès par le rapport de l'habilité = dégats 
+# Ajouter ces dégats aux dégats du lancer de dès 
+# Soustraire l'armure
+# Retirer les dégats totaux des PV
+# Afficher les résultats de chaque tour
 
 # Ton code ici
-
+billy = Billy(10, 15, 15, 2, 1)
+dwarf = Ennemi("Tyron", 8, 13, 2, 1)
+billy.fight(dwarf)
 
 """Pour les exercices suivants, tu vas devoir modifier ta classe Billy"""
 """
