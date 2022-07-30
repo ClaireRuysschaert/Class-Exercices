@@ -38,18 +38,23 @@ Cette classe dispose d'une méthode qui permet d'afficher un résumé au travers
 # Ton code ici
  
 class Weapon():
-        def __init__(self, weapon_name, weapon_damages):
-            self.weapon_name = weapon_name
-            self.weapon_damages = weapon_damages
+    def __init__(self, weapon_name, weapon_damages):
+        self.weapon_name = weapon_name
+        self.weapon_damages = weapon_damages
 
+class Helmet():
+    def __init__(self, helmet_name, helmet_protection):
+        self.helmet_name = helmet_name
+        self.helmet_protection  = helmet_protection
 class Billy():
-    def __init__(self, hability, PV, skill, damages, armor, weapon: Weapon):
+    def __init__(self, hability, PV, skill, damages, armor, weapon: Weapon, helmet: Helmet):
         self.hability = hability
         self.PV = PV
         self.skill = skill
         self.damages = damages
         self.armor = armor
         self.weapon = weapon
+        self.helmet = helmet
 
     def __str__(self) -> str:
         return f"Habilitiy = {self.hability}; Endurence = {self.PV}; Skill = {self.skill}; Damages = {self.damages}, Armor = {self.armor}, Weapon = {self.weapon}"
@@ -62,9 +67,10 @@ class Billy():
             ratio = self.hability/ennemi.hability
             billy_damages = self.damages + self.weapon.weapon_damages + (dice*ratio) - ennemi.armor
             ennemi.PV -= billy_damages
-            ennemi_damages = ennemi.damages + ((7-(dice*(1/ratio)))) - billy.armor
+            ennemi_damages = ennemi.damages + ((7-(dice*(1/ratio)))) - billy.armor - self.helmet.helmet_protection
             self.PV -= ennemi_damages
             print(f"\nBilly damages = {billy_damages}; ennemi PV left = {ennemi.PV}, \nEnnemi damages = {ennemi.damages}; billy PV left = {billy.PV}.\n")
+            print(f"Billy attacks with {self.weapon.weapon_name} and wears {self.helmet.helmet_name}." )
 
 
 """
@@ -95,10 +101,10 @@ Ajoute à Billy un attribut "arme" qui sera un objet de type "Arme".
 Cette nouvelle arme doit être prise en compte dans le calcul des dégats : il faut ajouter les dégats de l'arme à ceux de Billy.
 """
 
-
-marjolaine = Weapon("sword", 5)
-billy = Billy(10, 15, 15, 2, 1, marjolaine)
-dwarf = Ennemi("Tyron", 8, 13, 2, 1)
+marjolaine = Weapon("marjolaine", 5)
+bathing_cap = Helmet("Bathing cap", 1)
+billy = Billy(hability=10, PV=15, skill=15, damages=2, armor=1, weapon=marjolaine, helmet=bathing_cap)
+dwarf = Ennemi(name="Tyron", hability=8, PV=23, armor=12, damages=11)
 billy.fight(dwarf)
 
 """
