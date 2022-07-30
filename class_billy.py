@@ -35,30 +35,36 @@ Exercice 2:
 Crée une classe "Billy" qui aura presque les mêmes attributs que le billy de ton livre. (Habilité, Endurance, Adresse, Dégats, Armure)
 Cette classe dispose d'une méthode qui permet d'afficher un résumé au travers d'un print.
 """
-
-
 # Ton code ici
+ 
+class Weapon():
+        def __init__(self, weapon_name, weapon_damages):
+            self.weapon_name = weapon_name
+            self.weapon_damages = weapon_damages
+
 class Billy():
-    def __init__(self, hability, PV, skill, damages, armor):
+    def __init__(self, hability, PV, skill, damages, armor, weapon: Weapon):
         self.hability = hability
         self.PV = PV
         self.skill = skill
         self.damages = damages
         self.armor = armor
+        self.weapon = weapon
 
     def __str__(self) -> str:
-        return f"Habilitiy = {self.hability}; Endurence = {self.PV}; Skill = {self.skill}; Damages = {self.damages}, Armor = {self.armor}"
+        return f"Habilitiy = {self.hability}; Endurence = {self.PV}; Skill = {self.skill}; Damages = {self.damages}, Armor = {self.armor}, Weapon = {self.weapon}"
 
+    
     def fight(self, ennemi: Ennemi):
         # Le combat dure jusqu'à ce qu'un joueur n'ait plus de PV.
         while self.PV > 0 and ennemi.PV > 0:
             dice = random.randint(1,6)
             ratio = self.hability/ennemi.hability
-            billy_damages = self.damages + (dice*ratio) - ennemi.armor
+            billy_damages = self.damages + self.weapon.weapon_damages + (dice*ratio) - ennemi.armor
             ennemi.PV -= billy_damages
             ennemi_damages = ennemi.damages + ((7-(dice*(1/ratio)))) - billy.armor
             self.PV -= ennemi_damages
-            print(f"Billy damages = {billy_damages}; ennemi PV left = {ennemi.PV}, Ennemi damages = {ennemi.damages}; billy PV left = {billy.PV}.")
+            print(f"\nBilly damages = {billy_damages}; ennemi PV left = {ennemi.PV}, \nEnnemi damages = {ennemi.damages}; billy PV left = {billy.PV}.\n")
 
 
 """
@@ -79,9 +85,7 @@ d'afficher les PV restants de chacun des participants, etc. (N'hésite pas à ca
 # Afficher les résultats de chaque tour
 
 # Ton code ici
-billy = Billy(10, 15, 15, 2, 1)
-dwarf = Ennemi("Tyron", 8, 13, 2, 1)
-billy.fight(dwarf)
+
 
 """Pour les exercices suivants, tu vas devoir modifier ta classe Billy"""
 """
@@ -91,11 +95,17 @@ Ajoute à Billy un attribut "arme" qui sera un objet de type "Arme".
 Cette nouvelle arme doit être prise en compte dans le calcul des dégats : il faut ajouter les dégats de l'arme à ceux de Billy.
 """
 
+
+marjolaine = Weapon("sword", 5)
+billy = Billy(10, 15, 15, 2, 1, marjolaine)
+dwarf = Ennemi("Tyron", 8, 13, 2, 1)
+billy.fight(dwarf)
+
 """
 Exercice 5:
-Crée une classe "Armure" qui aura ces attributs : Nom, Armure.
-Ajoute à Billy un attribut "armure" qui sera un objet de type "Armure".
-Cette nouvelle armure doit être prise en compte dans le calcul des dégats : il faut ajouter les dégats de l'armure à ceux de Billy.
+Crée une classe "Casque" qui aura ces attributs : Nom, casque.
+Ajoute à Billy un attribut "casque" qui sera un objet de type "casque".
+ce nouveau casque doit être pris en compte dans le calcul des dégats : il faut ajouter l'armure du casque à ceux de Billy.
 """
 
 """
