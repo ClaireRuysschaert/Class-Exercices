@@ -56,6 +56,13 @@ class Billy():
         self.weapon = weapon
         self.helmet = helmet
 
+    
+    def inventory(self):
+        weapon = self.weapon.weapon_name
+        helmet = self.helmet.helmet_name
+        whats_in_my_bag = {"weapon ":weapon, "helmet ":helmet}
+        print(f"Inventory : " + str(whats_in_my_bag))
+
     def __str__(self) -> str:
         return f"Habilitiy = {self.hability}; Endurence = {self.PV}; Skill = {self.skill}; Damages = {self.damages}, Armor = {self.armor}, Weapon = {self.weapon}"
 
@@ -106,6 +113,7 @@ bathing_cap = Helmet("Bathing cap", 1)
 billy = Billy(hability=10, PV=15, skill=15, damages=2, armor=1, weapon=marjolaine, helmet=bathing_cap)
 dwarf = Ennemi(name="Tyron", hability=8, PV=23, armor=12, damages=11)
 billy.fight(dwarf)
+inventory=billy.inventory()
 
 """
 Exercice 5:
@@ -116,8 +124,6 @@ ce nouveau casque doit être pris en compte dans le calcul des dégats : il faut
 
 """
 Exercice 6:
-Ajoute à la classe "Billy" un attribut "Inventaire" qui sera un dictionnaire avec les clés "Arme" et "Armure".
+Ajoute à la classe "Billy" un attribut "Inventaire" qui sera un dictionnaire avec les clés "Arme" et "casque".
 Ajoute également à la classe "Billy" une méthode "AfficherInventaire" qui affiche le contenu de l'inventaire.
-Enfin, ajoute à la classe "Billy" une méthode "AjouterArme" qui prend en paramètre un objet de type "Arme" et qui ajoute cette arme à l'inventaire.
-Fait de même pour l'armure.
 """
